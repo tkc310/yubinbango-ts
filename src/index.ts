@@ -120,7 +120,7 @@ export class YubinBango {
     }
   }
   jsonp(url: string, fn: (data: YubinBangoData) => void) {
-    window['$yubin'] = (data) => fn(data);
+    window['$yubin'] = data => fn(data);
     const scriptTag = document.createElement('script');
     scriptTag.setAttribute('type', 'text/javascript');
     scriptTag.setAttribute('charset', 'UTF-8');
@@ -133,7 +133,7 @@ export class YubinBango {
     if (yubin3 in CACHE && yubin7 in CACHE[yubin3]) {
       fn?.(this.selectAddr(CACHE[yubin3][yubin7]));
     } else {
-      this.jsonp(`${this.URL}/${yubin3}.js`, (data) => {
+      this.jsonp(`${this.URL}/${yubin3}.js`, data => {
         CACHE[yubin3] = data;
         fn?.(this.selectAddr(data[yubin7]));
       });

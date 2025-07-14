@@ -2,9 +2,9 @@ pre-push:
   piped: true
   commands:
     lint:
-      run: npm run lint
+      run: npm run lint .
     format:
-      run: npm run format:check
+      run: npm run format:check .
     type-check:
       run: npm run type-check
     test:

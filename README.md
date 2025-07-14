@@ -1,6 +1,6 @@
 # yubinbango-ts
 
-このライブラリは [yubinbango](https://github.com/yubinbango/yubinbango) の内部で利用されている処理をTypeScript化したものです。 
+このライブラリは [yubinbango](https://github.com/yubinbango/yubinbango) の内部で利用されている処理をTypeScript化したものです。
 
 ## インストール
 
@@ -16,7 +16,7 @@ npm i -S yubinbango-ts
 import { YubinBango } from 'yubinbango-ts';
 
 // 郵便番号から住所を取得
-const yubin = new YubinBango('1000001', (address) => {
+const yubin = new YubinBango('1000001', address => {
   console.log(address);
   // {
   //   prefecture_id: '13',
@@ -37,7 +37,7 @@ import { YubinBango } from 'yubinbango-ts';
 const yubin = new YubinBango('1000001');
 
 // 後から住所を取得
-yubin.getAddr('1000001', (address) => {
+yubin.getAddr('1000001', address => {
   console.log('住所:', address.prefecture + address.city + address.street);
 });
 ```
@@ -53,7 +53,7 @@ const address: Address = {
   prefecture: '東京都',
   city: '千代田区',
   street: '千代田',
-  building: ''
+  building: '',
 };
 ```
 
@@ -83,11 +83,11 @@ new YubinBango(inputVal?: string, callback?: (addr: Address) => void)
 
 ```typescript
 interface Address {
-  prefecture_id: string;  // 都道府県ID
-  prefecture: string;     // 都道府県名
-  city: string;          // 市区町村名
-  street: string;        // 町域名
-  building: string;      // 建物名
+  prefecture_id: string; // 都道府県ID
+  prefecture: string; // 都道府県名
+  city: string; // 市区町村名
+  street: string; // 町域名
+  building: string; // 建物名
 }
 ```
 
