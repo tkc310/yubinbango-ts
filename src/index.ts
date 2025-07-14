@@ -14,6 +14,11 @@ declare global {
   }
 }
 
+// Node.js環境でのグローバル変数
+declare global {
+  var $yubin: ((data: YubinBangoData) => void) | undefined;
+}
+
 export type Address = ReturnType<YubinBango['addrDic']>;
 
 export class YubinBango {
@@ -120,12 +125,48 @@ export class YubinBango {
     }
   }
   jsonp(url: string, fn: (data: YubinBangoData) => void) {
-    window['$yubin'] = data => fn(data);
-    const scriptTag = document.createElement('script');
-    scriptTag.setAttribute('type', 'text/javascript');
-    scriptTag.setAttribute('charset', 'UTF-8');
-    scriptTag.setAttribute('src', url);
-    document.head.appendChild(scriptTag);
+    // ブラウザ環境の場合
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      window['$yubin'] = data => fn(data);
+      const scriptTag = document.createElement('script');
+      scriptTag.setAttribute('type', 'text/javascript');
+      scriptTag.setAttribute('charset', 'UTF-8');
+      scriptTag.setAttribute('src', url);
+      document.head.appendChild(scriptTag);
+    } else {
+      // Node.js環境の場合
+      const https = require('https');
+      const http = require('http');
+
+      const protocol = url.startsWith('https:') ? https : http;
+
+      protocol
+        .get(url, (res: any) => {
+          let data = '';
+          res.on('data', (chunk: string) => {
+            data += chunk;
+          });
+          res.on('end', () => {
+            try {
+              // JSONPレスポンスからデータを抽出
+              const match = data.match(/\$yubin\((.+)\)/);
+              if (match) {
+                const jsonData = JSON.parse(match[1]);
+                fn(jsonData);
+              } else {
+                throw new Error('Invalid JSONP response');
+              }
+            } catch (error) {
+              console.error('Error parsing JSONP response:', error);
+              fn({});
+            }
+          });
+        })
+        .on('error', (error: Error) => {
+          console.error('Error fetching data:', error);
+          fn({});
+        });
+    }
   }
   getAddr(yubin7: string, fn?: (addr: Address) => void): void {
     const yubin3 = yubin7.substring(0, 3);

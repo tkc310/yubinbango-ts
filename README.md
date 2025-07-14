@@ -57,6 +57,17 @@ const address: Address = {
 };
 ```
 
+### Node.jsでの使用
+
+```typescript
+import { YubinBango } from 'yubinbango-ts';
+
+// Node.js環境でも同じように使用可能
+const yubin = new YubinBango('1000001', address => {
+  console.log('住所:', address.prefecture + address.city + address.street);
+});
+```
+
 ## API
 
 ### YubinBango クラス
@@ -101,9 +112,10 @@ interface Address {
 
 ## 注意事項
 
-- このライブラリはブラウザ環境でのみ動作します
+- このライブラリはブラウザ環境とNode.js環境の両方で動作します
 - 郵便番号データは外部APIから取得されます
 - ネットワーク接続が必要です
+- Node.js環境では`https`モジュールを使用してデータを取得します
 
 ## ライセンス
 

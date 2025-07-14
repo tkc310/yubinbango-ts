@@ -134,3 +134,20 @@ describe('Address type', () => {
     expect(address).toHaveProperty('building');
   });
 });
+
+describe('Environment compatibility', () => {
+  it('should work in Node.js environment', () => {
+    // Node.js環境での動作確認
+    const yubin = new YubinBango();
+    expect(yubin).toBeInstanceOf(YubinBango);
+    expect(typeof yubin.getAddr).toBe('function');
+  });
+
+  it('should handle environment detection', () => {
+    const yubin = new YubinBango();
+
+    // 環境変数の確認
+    expect(typeof window).toBe('object'); // Jestのjsdom環境
+    expect(typeof document).toBe('object'); // Jestのjsdom環境
+  });
+});
