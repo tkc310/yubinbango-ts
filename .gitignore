@@ -22,7 +22,6 @@ coverage/
 .jest/
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo

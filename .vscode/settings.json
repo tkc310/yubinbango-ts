@@ -1,0 +1,34 @@
+{
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "html.format.contentUnformatted": "",
+  "editor.codeActionsOnSave": {
+    "source.removeUnusedImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.accessibilitySupport": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "editor.renderLineHighlight": "gutter",
+  "editor.renderControlCharacters": true,
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "explorer.confirmDragAndDrop": false,
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    ".history": true
+  },
+  "prettier.configPath": "./.prettierrc.js",
+  "search.exclude": {
+    ".history": true
+  },
+  "search.smartCase": true
+}
