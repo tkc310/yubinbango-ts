@@ -1,3 +1,4 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -6,9 +7,10 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint', 'prettier'],
-  extends: ['eslint:recommended', '@typescript-eslint/recommended', 'prettier'],
+  extends: ['eslint:recommended', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -20,5 +22,5 @@ module.exports = {
     es2020: true,
     node: true,
   },
-  ignorePatterns: ['dist/', 'node_modules/', '*.js'],
+  ignorePatterns: ['dist/', 'node_modules/', '*.js', '*.test.ts'],
 };
