@@ -29,6 +29,21 @@ describe('YubinBango', () => {
         building: '',
       });
     });
+
+    it('should use custom URL when provided', () => {
+      const customUrl = 'https://example.com/data';
+      const yubinWithCustomUrl = new YubinBango('', undefined, {
+        url: customUrl,
+      });
+      expect(yubinWithCustomUrl.URL).toBe(customUrl);
+    });
+
+    it('should use default URL when no custom URL provided', () => {
+      const yubinWithDefaultUrl = new YubinBango();
+      expect(yubinWithDefaultUrl.URL).toBe(
+        'https://yubinbango.github.io/yubinbango-data/data'
+      );
+    });
   });
 
   describe('chk7', () => {

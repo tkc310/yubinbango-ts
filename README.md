@@ -29,6 +29,17 @@ new YubinBango('1000001', address => {
   //   building: ''
   // }
 });
+
+// カスタムURLを使用
+new YubinBango(
+  '1000001',
+  address => {
+    console.log(address);
+  },
+  {
+    url: 'https://your-custom-domain.com/data',
+  }
+);
 ```
 
 ## API
@@ -36,13 +47,15 @@ new YubinBango('1000001', address => {
 ### constructor
 
 ```typescript
-import { YubinBango } from 'yubinbango-ts';
+import { YubinBango, YubinBangoOptions } from 'yubinbango-ts';
 
-new YubinBango(yubinBango?: string, callback?: (addr: Address) => void)
+new YubinBango(yubinBango?: string, callback?: (addr: Address) => void, options?: YubinBangoOptions)
 ```
 
 - `yubinBango`: 郵便番号（7桁の数字、ハイフン付きでも可）
 - `callback`: 住所取得後のコールバック関数
+- `options`: オプション設定
+  - `url`: マスタデータ取得先のURL（デフォルト: `https://yubinbango.github.io/yubinbango-data/data`）
 
 ### Address 型
 

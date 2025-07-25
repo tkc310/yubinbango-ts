@@ -81,10 +81,16 @@ export class YubinBango {
     ...YUBINBANGO_PREFECTURE.map(p => p.label),
   ];
 
-  constructor(inputVal: string = '', callback?: (addr: Address) => void) {
-    if (inputVal) {
+  constructor(
+    yubinBango: string = '',
+    callback?: (addr: Address) => void,
+    options?: YubinBangoOptions
+  ) {
+    this.URL =
+      options?.url || 'https://yubinbango.github.io/yubinbango-data/data';
+    if (yubinBango) {
       // 全角の数字を半角に変換、ハイフンが入っていても数字のみを抽出
-      const a: string = inputVal.replace(/[０-９]/g, (s: string) =>
+      const a: string = yubinBango.replace(/[０-９]/g, (s: string) =>
         String.fromCharCode(s.charCodeAt(0) - 65248)
       );
       const b: RegExpMatchArray | [] = a.match(/\d/g) || [];
@@ -149,7 +155,7 @@ export class YubinBango {
       const protocol = url.startsWith('https:') ? https : http;
 
       protocol
-        .get(url, (res: any) => {
+        .get(url, (res: import('http').IncomingMessage) => {
           let data = '';
           res.on('data', (chunk: string) => {
             data += chunk;
