@@ -1,6 +1,39 @@
-# ライブラリの公開手順
+## 開発
 
-## 1. 事前準備
+### Setup
+
+```bash
+# 依存関係のインストール
+npm i
+
+# .git/hooksの設定
+npx lefthook install
+```
+
+### Usage
+
+```bash
+# 開発モードでビルド（ファイル監視）
+npm run dev
+
+# ビルド
+npm run build
+
+# リント
+npm run lint
+npm run lint:fix
+
+# フォーマット
+npm run format
+npm run format:check
+
+# 型チェック
+npm run type-check
+```
+
+## 公開手順
+
+### 1. 事前準備
 
 ```bash
 # npmにログイン（初回のみ）
@@ -10,7 +43,7 @@ npm login
 npm view yubinbango-ts
 ```
 
-## 2. 公開前の確認
+### 2. 公開前の確認
 
 ```bash
 # コードの品質チェック
@@ -25,7 +58,7 @@ npm run build
 npm pack --dry-run
 ```
 
-## 3. バージョン管理
+### 3. バージョン管理
 
 ```bash
 # パッチバージョンの更新（1.0.0 → 1.0.1）
@@ -38,7 +71,7 @@ npm version minor
 npm version major
 ```
 
-## 4. 公開
+### 4. 公開
 
 ```bash
 # npmに公開
@@ -49,7 +82,7 @@ npm run prepublishOnly
 npm publish
 ```
 
-## 5. 公開後の確認
+### 5. 公開後の確認
 
 ```bash
 # 公開されたパッケージの確認
@@ -59,7 +92,7 @@ npm view yubinbango-ts
 npm install yubinbango-ts
 ```
 
-### 注意事項
+#### 注意事項
 
 - 公開前に必ずテストを実行してください
 - `package.json`の`version`が正しく更新されていることを確認してください
